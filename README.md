@@ -1,4 +1,6 @@
-# PwaAngular
+# Pwa Angular Aplicacion de notas
+
+Creamos, consultamos, editamos  y eliminamos  notas. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
 
