@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SwUpdate} from '@angular/service-worker';
+import {NoteServiceService} from './services/note-service.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,16 @@ import {SwUpdate} from '@angular/service-worker';
 })
 export class AppComponent implements  OnInit {
   title = 'pwa-angular';
-  constructor(private swUpdate: SwUpdate ) {
+  panelOpenState: boolean = false;
+  categorias: any = [' trabajo ', ' personal '];
+  nota: any = {};
+  notas: any = {};
 
-
+  constructor(public snackBar: MatSnackBar, private swUpdate: SwUpdate, private noteServiceService: NoteServiceService) {
+    this.noteServiceService.getNotes().valueChanges().subscribe((fbNotas) => {
+      this.notas = fbNotas.reverse();
+      console.log("notas:", this.notas);
+    });
   }
 
   ngOnInit(): void {
@@ -19,6 +28,18 @@ export class AppComponent implements  OnInit {
         window.location.reload();
       });
     }
+  }
+
+  guardarNota() {
+    console.log("nota: ", this.nota);
+    this.nota.id = Date.now();
+    this.noteServiceService.createNota(this.nota).then( () => {
+      this.nota = {};
+
+      this.snackBar.open('Nota creada!', null, {
+        duration: 2000,
+      });
+    });
   }
 
 }

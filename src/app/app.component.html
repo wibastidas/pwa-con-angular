@@ -7,37 +7,46 @@
   </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
+
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Personal data
+        Nota
       </mat-panel-title>
       <mat-panel-description>
-        Type your name and age
+        Crear o Editar una nueva nota
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-form-field>
-      <input matInput placeholder="First name">
+      <input  matInput placeholder="Titulo de la Nota" [(ngModel)]="nota.titulo">
+    </mat-form-field>
+
+     <mat-form-field>
+      <mat-select placeholder="Categoria" [(ngModel)]="nota.categoria">
+        <mat-option *ngFor="let cat of categorias" [value]="cat">
+          {{ cat }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Age">
+      <textarea matInput placeholder="Cuerpo de la nota" [(ngModel)]="nota.cuerpo"></textarea>
     </mat-form-field>
+
+    <button (click)="guardarNota()" mat-raised-button color="accent">Guardar Nota</button>
+
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
+
+    <mat-list *ngFor="let nota of notas">
+      <mat-list-item>
+        <h3 matLine> {{nota.titulo}} </h3>
+        <p matLine>  {{nota.cuerpo}}  </p>
+        <small matLine> {{nota.categoria}} - {{nota.id  | date}}  </small>
+      </mat-list-item>
+    </mat-list>
+
 </mat-accordion>
 
 

@@ -17,6 +17,7 @@
     "@angular/common": "~7.0.0",
     "@angular/compiler": "~7.0.0",
     "@angular/core": "~7.0.0",
+    "@angular/fire": "^5.1.0",
     "@angular/forms": "~7.0.0",
     "@angular/http": "~7.0.0",
     "@angular/material": "^7.0.2",
@@ -25,7 +26,9 @@
     "@angular/pwa": "^0.10.2",
     "@angular/router": "~7.0.0",
     "@angular/service-worker": "~7.0.0",
+    "angularfire2": "^5.1.0",
     "core-js": "^2.5.4",
+    "firebase": "^5.5.7",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
