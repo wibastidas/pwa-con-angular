@@ -13,7 +13,7 @@ export class AppComponent implements  OnInit {
   panelOpenState: boolean = false;
   categorias: any = [' trabajo ', ' personal '];
   nota: any = {};
-  notas: any = {};
+  notas: {}[];
 
   constructor(public snackBar: MatSnackBar, private swUpdate: SwUpdate, private noteServiceService: NoteServiceService) {
     this.noteServiceService.getNotes().valueChanges().subscribe((fbNotas) => {
@@ -32,7 +32,9 @@ export class AppComponent implements  OnInit {
 
   guardarNota() {
     console.log("nota: ", this.nota);
-    this.nota.id = Date.now();
+    if(!this.nota.id) {
+      this.nota.id = Date.now();
+    }
     this.noteServiceService.createNota(this.nota).then( () => {
       this.nota = {};
 
@@ -41,5 +43,25 @@ export class AppComponent implements  OnInit {
       });
     });
   }
+
+  seleccionarNota(nota) {
+    console.log("seleccionarNota nota: ", nota);
+    this.nota = nota;
+  }
+
+  eliminarNota(nota){
+    const rsp = confirm('Confirme la eliminación de ' + nota.titulo);
+    if( rsp ) {
+      this.noteServiceService.deleteNote(nota)
+        .then( () => {
+          this.nota = {};
+          this.snackBar.open('Nota eliminada.', null, {
+            duration: 2000
+          });
+        });
+    }
+  }
+
+
 
 }

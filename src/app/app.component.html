@@ -39,11 +39,15 @@
 
   </mat-expansion-panel>
 
-    <mat-list *ngFor="let nota of notas">
-      <mat-list-item>
-        <h3 matLine> {{nota.titulo}} </h3>
+    <mat-list>
+      <mat-list-item *ngFor="let nota of notas" (click)="seleccionarNota(nota)">
+        <h3 matLine> {{nota.titulo}}
+          <div style="float: right; font-weight: normal; opacity:.5; margin-right: .35rem;" (click)="eliminarNota(nota)">❌</div>
+        </h3>
         <p matLine>  {{nota.cuerpo}}  </p>
-        <small matLine> {{nota.categoria}} - {{nota.id  | date}}  </small>
+        <small matLine> {{nota.categoria}}
+          <div style="font-size: .85rem; opacity: .5; font-style: italic; float: right;font-weight: normal;"> {{nota.id  | date}} </div>
+        </small>
       </mat-list-item>
     </mat-list>
 
