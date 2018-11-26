@@ -21,6 +21,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {FormsModule} from '@angular/forms';
 import {NoteServiceService} from './services/note-service.service';
 import {MatSnackBarModule} from '@angular/material/typings/esm5/snack-bar';
+import {AuthService} from './services/auth.service';
 
 
 const firebaseConfig:any = {
@@ -56,7 +57,7 @@ const firebaseConfig:any = {
     FormsModule,
     MatSnackBarModule
   ],
-  providers: [NoteServiceService],
+  providers: [NoteServiceService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

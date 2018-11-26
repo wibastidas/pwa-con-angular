@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SwUpdate} from '@angular/service-worker';
 import {NoteServiceService} from './services/note-service.service';
 import {MatSnackBar} from '@angular/material';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements  OnInit {
   nota: any = {};
   notas: {}[];
 
-  constructor(public snackBar: MatSnackBar, private swUpdate: SwUpdate, private noteServiceService: NoteServiceService) {
+  constructor(public authService: AuthService, public snackBar: MatSnackBar, private swUpdate: SwUpdate, private noteServiceService: NoteServiceService) {
     this.noteServiceService.getNotes().valueChanges().subscribe((fbNotas) => {
       this.notas = fbNotas.reverse();
       console.log("notas:", this.notas);
@@ -60,6 +61,10 @@ export class AppComponent implements  OnInit {
           });
         });
     }
+  }
+
+  login() {
+    this.authService.loginWithFacebook();
   }
 
 
